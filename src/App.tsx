@@ -50,7 +50,7 @@ export default function App() {
  const toggleMyVisit=()=>{if(!name){setTab('profile');return;} const entering=!myInside; setInside(prev=>entering?[...prev,memberId]:prev.filter(x=>x!==memberId)); setVisits(prev=>[{id:memberId,name,action: entering ? ('in' as const) : ('out' as const),at:timeNow()},...prev].slice(0,30));};
  const saveName=()=>{const clean=nameDraft.trim();if(clean){setName(clean);localStorage.setItem('fb-member-name',clean);}};
  const addWorkout=(e:React.FormEvent)=>{e.preventDefault();if(!name){setTab('profile');return;}setWorkouts(prev=>[{id:memberId+'|'+Date.now(),date,time,exercise,sets:Number(sets),reps:Number(reps),weight:Number(weight),notes},...prev]);setShowForm(false);setNotes('');setTab('history');};
- const setDemoOccupancy=()=>{const n=Math.max(0,Math.min(capacity,Number(demoCount)||0));setInside(Array.from({length:n},(_,i)=>'demo-client-'+(i+1)));setVisits(prev=>[{id:'demo',name:'Administratori',action:'in',at:timeNow()},...prev].slice(0,30));};
+ const setDemoOccupancy=()=>{const n=Math.max(0,Math.min(capacity,Number(demoCount)||0));setInside(Array.from({length:n},(_,i)=>'demo-client-'+(i+1)));setVisits(prev=>[{id:'demo',name:'Administratori',action:'in' as const,at:timeNow()},...prev].slice(0,30));};
  const qrValue='FITNESS-BLENDI:'+memberId;
  const nav=(key:string)=>{setTab(key);setMenu(false);};
  const maxHour=Math.max(...hours.map(x=>x.v)), maxDay=Math.max(...days.map(x=>x.v));
